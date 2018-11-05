@@ -1,0 +1,63 @@
+h1, h2, h3, h4, h5, h6 {
+    color: white;
+}
+body {
+    background-color: black;
+}
+
+.theTop {
+    height: 12%;
+    margin: 0;
+    background-color: gray;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    left: 5px;
+}
+.topLeft {
+    width: 40%;
+}
+.topCenter {
+    width: 20%;
+}
+.topRight {
+    width: 40%;
+}
+
+.theBottom {
+    margin-top: 14%;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+}
+.bottomLeft {
+    width: 20%;
+    height: auto;
+}
+.bottomCenter {
+    padding: 10px;
+    background-color: gray;
+    width: 60%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    align-items: center;
+}
+.bottomRight {
+    width: 20%;
+    height: auto;
+}
+.button {
+    width: 15%;
+}
+.nextButton {
+    width: 100%;
+    background-color: white;
+    color: gray;
+}
