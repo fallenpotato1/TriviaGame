@@ -61,3 +61,6 @@ body {
     background-color: white;
     color: gray;
 }
+input {
+    margin-top: 10px;
+}

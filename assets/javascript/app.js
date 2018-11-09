@@ -28,22 +28,23 @@ $(document).ready(function () {
             correct: "What was the previous question"
         }
     }
-    
-    
+
+
 
     var totalCorrect = 0
+    var unanswered = -5
+    var incorrect = 0
     function startGame() {
-        var timeLeft = 10
+        var timeLeft = 30
         theInterval = setInterval(function () {
             $(".progressBar").text(timeLeft--)
             if (timeLeft === -1) {
                 endGame()
-                clearInterval(theInterval)
             }
         }, 1000);
         $(".question").append("<h2 class='questionWords'>" + theQuestions.question1.question + "</h2>")
         theQuestions.question1.answers.forEach(function (answers) {
-            $(".answer").append("<input type='radio' name='firstAnswer' value='" + answers + "'>" + answers + "<br>")
+            $(".answer").append("<label><input type='radio' name='firstAnswer' value='" + answers + "'>" + answers + "</label><br>")
         })
         $(".bottomCenter").append("<br><br>")
         $(".button").append("<button class='nextButton'>Next</button>")
@@ -55,6 +56,11 @@ $(document).ready(function () {
             var firstAnswer = $("input[name='firstAnswer']:checked").val();
             if (firstAnswer === theQuestions.question1.answers[3]) {
                 totalCorrect++
+            } else if (firstAnswer === undefined) {
+                unanswered * -1 + 1
+                console.log("im wrong")
+            } else {
+                incorrect++
             }
             $(".question").empty()
             $(".answer").empty()
@@ -62,7 +68,7 @@ $(document).ready(function () {
 
             $(".question").append("<h2 class='questionWords'>" + theQuestions.question2.question + "</h2>")
             theQuestions.question2.answers.forEach(function (answers) {
-                $(".answer").append("<input type='radio' name='secondAnswer' value='" + answers + "'>" + answers + "<br>")
+                $(".answer").append("<label><input type='radio' name='secondAnswer' value='" + answers + "'>" + answers + "</label><br>")
             })
             $(".bottomCenter").append("<br><br>")
             $(".button").append("<button class='nextButton'>Next</button>")
@@ -75,6 +81,11 @@ $(document).ready(function () {
             var secondAnswer = $("input[name='secondAnswer']:checked").val();
             if (secondAnswer === theQuestions.question2.answers[3]) {
                 totalCorrect++
+            } else if (secondAnswer === undefined) {
+                unanswered++
+                console.log("im wrong")
+            } else {
+                incorrect++
             }
             $(".question").empty()
             $(".answer").empty()
@@ -82,7 +93,7 @@ $(document).ready(function () {
 
             $(".question").append("<h2 class='questionWords'>" + theQuestions.question3.question + "</h2>")
             theQuestions.question3.answers.forEach(function (answers) {
-                $(".answer").append("<input type='radio' name='thirdAnswer' value='" + answers + "'>" + answers + "<br>")
+                $(".answer").append("<label><input type='radio' name='thirdAnswer' value='" + answers + "'>" + answers + "</label><br>")
             })
             $(".bottomCenter").append("<br><br>")
             $(".button").append("<button class='nextButton'>Next</button>")
@@ -95,54 +106,75 @@ $(document).ready(function () {
             var thirdAnswer = $("input[name='thirdAnswer']:checked").val();
             if (thirdAnswer === theQuestions.question3.answers[3]) {
                 totalCorrect++
+            } else if (thirdAnswer === undefined) {
+                unanswered++
+                console.log("im wrong")
+            } else {
+                incorrect++
             }
+
             $(".question").empty()
             $(".answer").empty()
             $(".button").empty()
 
             $(".question").append("<h2 class='questionWords'>" + theQuestions.question4.question + "</h2>")
             theQuestions.question4.answers.forEach(function (answers) {
-                $(".answer").append("<input type='radio' name='fourthAnswer' value='" + answers + "'>" + answers + "<br>")
+                $(".answer").append("<label><input type='radio' name='fourthAnswer' value='" + answers + "'>" + answers + "</label><br>")
             })
             $(".bottomCenter").append("<br><br>")
             $(".button").append("<button class='nextButton'>Next</button>")
             fifthQuestion()
         })
     }
-    
+
     function fifthQuestion() {
         $(".nextButton").on("click", function () {
-            var fourthAnswer = $("input[name='fouthAnswer']:checked").val();
+            var fourthAnswer = $("input[name='fourthAnswer']:checked").val();
             if (fourthAnswer === theQuestions.question4.answers[3]) {
                 totalCorrect++
+            } else if (fourthAnswer === undefined) {
+                unanswered++
+                console.log("im wrong")
+            } else {
+                incorrect++
             }
             $(".question").empty()
             $(".answer").empty()
             $(".button").empty()
 
             $(".question").append("<h2 class='questionWords'>" + theQuestions.question5.question + "</h2>")
-            theQuestions.question4.answers.forEach(function (answers) {
-                $(".answer").append("<input type='radio' name='fifthAnswer' value='" + answers + "'>" + answers + "<br>")
+            theQuestions.question5.answers.forEach(function (answers) {
+                $(".answer").append("<label><input type='radio' name='fifthAnswer' value='" + answers + "'>" + answers + "</label><br>")
             })
             $(".bottomCenter").append("<br><br>")
             $(".button").append("<button class='nextButton'>Next</button>")
             $(".nextButton").on("click", function () {
+                var fifthAnswer = $("input[name='fifthAnswer']:checked").val();
+                if (fifthAnswer === theQuestions.question5.answers[3]) {
+                    totalCorrect++
+                } else if (fifthAnswer === undefined) {
+                    unanswered++
+                } else {
+                    incorrect++
+                    console.log("helllo")
+
+                }
                 endGame()
             })
         })
     }
 
     function endGame() {
-        console.log(totalCorrect)
-        var fourthAnswer = $("input[name='fouthAnswer']:checked").val();
-            if (fourthAnswer === theQuestions.question4.answers[3]) {
-                totalCorrect++
-                console.log(totalCorrect)
-            }
-            $(".question").empty()
-            $(".answer").empty()
-            $(".button").empty()
-        
+        clearInterval(theInterval)
+        $(".question").empty()
+        $(".answer").empty()
+        $(".button").empty()
+        $(".progressBar").empty()
+
+        $(".question").append("<h1>Questions guessed correctly: " + totalCorrect + "</h1>")
+        $(".question").append("<h1>Questions guessed incorrectly: " + incorrect + "</h1>")
+        $(".question").append("<h1>Questions not guessed : " + -(unanswered) + "</h1>")
+
     }
 
 
